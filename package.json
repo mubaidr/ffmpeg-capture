@@ -1,19 +1,28 @@
 {
-  "name": "pkg-placeholder",
+  "name": "@mubaidr/ffmpeg-capture",
   "type": "module",
-  "version": "0.0.0",
-  "packageManager": "pnpm@9.5.0",
-  "description": "_description_",
-  "author": "Anthony Fu <anthonyfu117@hotmail.com>",
+  "version": "0.1.0",
+  "description": "A high-level, cross-platform screen/audio recording utility for Node.js and Electron apps using FFmpeg under the hood. Simple API. No native dependencies.",
+  "author": "Muhammad Ubaid Raza <mubaidr@gmail.com>",
   "license": "MIT",
-  "funding": "https://github.com/sponsors/antfu",
-  "homepage": "https://github.com/antfu/pkg-placeholder#readme",
+  "funding": "https://github.com/sponsors/mubaidr",
+  "homepage": "https://github.com/mubaidr/ffmpeg-capture#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/antfu/pkg-placeholder.git"
+    "url": "git+https://github.com/mubaidr/ffmpeg-capture.git"
   },
-  "bugs": "https://github.com/antfu/pkg-placeholder/issues",
-  "keywords": [],
+  "bugs": "https://github.com/mubaidr/ffmpeg-capture/issues",
+  "keywords": [
+    "ffmpeg",
+    "screen-recording",
+    "audio-recording",
+    "cross-platform",
+    "electron",
+    "nodejs",
+    "capture",
+    "video",
+    "streaming"
+  ],
   "sideEffects": false,
   "exports": {
     ".": {
@@ -40,23 +49,25 @@
     "build": "unbuild",
     "dev": "unbuild --stub",
     "lint": "eslint .",
-    "prepublishOnly": "nr build",
+    "lint-staged": "lint-staged",
+    "prepublishOnly": "npm run build",
     "release": "bumpp && npm publish",
     "start": "esno src/index.ts",
     "test": "vitest",
     "typecheck": "tsc --noEmit",
     "prepare": "simple-git-hooks"
   },
+  "dependencies": {
+    "ffmpeg-static": "^5.2.0"
+  },
   "devDependencies": {
     "@antfu/eslint-config": "^2.23.0",
-    "@antfu/ni": "^0.22.0",
     "@antfu/utils": "^0.7.10",
-    "@types/node": "^20.14.11",
+    "@types/node": "^20.19.1",
     "bumpp": "^9.4.1",
     "eslint": "^9.7.0",
     "esno": "^4.7.0",
     "lint-staged": "^15.2.7",
-    "pnpm": "^9.5.0",
     "simple-git-hooks": "^2.11.1",
     "typescript": "^5.5.3",
     "unbuild": "^2.0.0",
@@ -64,9 +75,10 @@
     "vitest": "^2.0.3"
   },
   "simple-git-hooks": {
-    "pre-commit": "pnpm lint-staged"
+    "pre-commit": "npm run lint-staged"
   },
   "lint-staged": {
-    "*": "eslint --fix"
+    "src/**/*.{ts,js}": "eslint --fix",
+    "test/**/*.{ts,js}": "eslint --fix"
   }
 }
